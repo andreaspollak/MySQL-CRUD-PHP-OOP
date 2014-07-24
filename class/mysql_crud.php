@@ -15,6 +15,7 @@ class Database{
 	private $db_user = "user";  // Change as required
 	private $db_pass = "password";  // Change as required
 	private $db_name = "database";	// Change as required
+	private $db_character_set = "";	// Change as required
 	
 	/*
 	 * Extra variables that are required by other function such as boolean con variable
@@ -32,6 +33,8 @@ class Database{
             	$seldb = @mysql_select_db($this->db_name,$myconn); // Credentials have been pass through mysql_connect() now select the database
                 if($seldb){
                 	$this->con = true;
+                	if($db_character_set != '')
+                	   @mysql_set_charset($db_character_set,$myconn);
                     return true;  // Connection has been made return TRUE
                 }else{
                 	array_push($this->result,mysql_error()); 
